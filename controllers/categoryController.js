@@ -68,12 +68,19 @@ class CategoryController {
   }
 
   static async delete(req, res) {
-    await prisma.category.delete({
-      where: {
-        id: Number(req.params.id)
-      }
-    })
-
+    try {
+      await prisma.category.delete({
+        where: {
+          id: Number(req.params.id)
+        }
+      })
+    } catch (err) {
+      if (err instanceof Prisma.PrismaClientKnownRequestError) {
+        if (err.code === "P2003") {
+          req.flash("error", "Cannot delete category. Category in use!");
+        }
+      } 
+    }
     res.redirect("/category");
   }
 }
