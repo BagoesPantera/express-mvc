@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("../../templates/head") %>
+  </head>
+
+  <body>
+    <%- include("../../templates/nav") %>
+
+    <section id="home-content" class="container">
+      <% if (messages.error) { %>
+        <div
+          class="alert alert-danger alert-dismissible fade show mt-4"
+          role="alert"
+        >
+          <%= messages.error %>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+          ></button>
+        </div>
+      <% } %>
+
+      <div class="align-items-center d-flex justify-content-between mt-5 mb-4">
+        <h3>Category List</h3>
+        <a href="/category/create" class="btn btn-outline-primary"> Add </a>
+      </div>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% categories.forEach((category) => { %>
+          <tr>
+            <th scope="row"><%= category.id %></th>
+            <td><%= category.name %></td>
+            <td class="d-flex gap-2">
+              <a
+                href="/category/<%= category.id %>/edit"
+                class="btn btn-sm btn-light"
+              >
+                <i class="bi bi-pencil-square"></i>
+              </a>
+              <form method="post" action="/category/<%= category.id %>/delete">
+                <button type="submit" class="btn btn-sm btn-light">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </form>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </section>
+
+    <%- include("../../templates/script") %>
+  </body>
+</html>
