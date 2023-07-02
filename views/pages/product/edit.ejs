@@ -28,15 +28,14 @@
 
             <input type="text" name="name" value="<%= product.name %>" class="form-control" id="name" placeholder="Ex. Nike N Air" required />
           </div>
-        </div>
-
-        <div class="mb-3 row justify-content-start">
           <div class="col-12 col-sm-6">
             <label for="size" class="form-label">Quantity</label>
 
             <input type="text" name="qty" value="<%= product.qty %>" class="form-control" id="size" placeholder="Ex. 32" required />
           </div>
+        </div>
 
+        <div class="mb-3 row justify-content-start">
           <div class="col-12 col-sm-6">
             <label for="size" class="form-label">Status</label>
 
@@ -45,9 +44,6 @@
               <option value="false" <%= product.available === false ? "selected" : "" %>>Non-Availabe</option>
             </select>
           </div>
-        </div>
-
-        <div class="mb-3 row justify-content-start align-items-end">
           <div class="col-12 col-sm-6">
             <label for="price" class="form-label">Price</label>
 
@@ -61,28 +57,31 @@
               required
             />
           </div>
+        </div>
 
+        <div class="mb-3 row justify-content-start align-items-end">
           <div class="col-12 col-sm-6">
             <img id="uploadPreview" src="/uploads/<%= product.img %>" class="my-3" style="width: 100px; height: 100px;" />
 
             <label for="img" class="form-label d-block">Image File</label>
             <input name="img" type="file" class="form-control" id="img"/>
           </div>
+          <div class="col-12 col-sm-6">
+            <label for="description" class="form-label"> Category </label>
+            <select name="categoryId" class="form-select" aria-label="Default select example" required>
+              <option value="">Open this for select category</option>
+              <% categories.forEach((category) => { %>
+                <% if (category.id === product.categoryId) { %>
+                  <option selected value="<%= category.id %>"><%= category.name %></option>
+                <% } else { %>
+                  <option value="<%= category.id %>"><%= category.name %></option>
+                <% } %>
+              <% }) %>
+            </select>
+          </div>
         </div>
 
-        <div class="mb-3">
-          <label for="description" class="form-label"> Category </label>
-          <select name="categoryId" class="form-select" aria-label="Default select example" required>
-            <option value="">Open this for select category</option>
-            <% categories.forEach((category) => { %>
-              <% if (category.id === product.categoryId) { %>
-                <option selected value="<%= category.id %>"><%= category.name %></option>
-              <% } else { %>
-                <option value="<%= category.id %>"><%= category.name %></option>
-              <% } %>
-            <% }) %>
-          </select>
-        </div>
+        
 
         <div class="mb-3">
           <label for="description" class="form-label"> Description </label>
