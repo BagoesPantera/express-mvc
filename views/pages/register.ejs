@@ -10,8 +10,8 @@
         class="row justify-content-center align-items-center"
         style="height: 100vh"
       >
-        <form class="col-4" action="/login" method="post">
-          <p class="h4 mb-5">Login to Ayoti</p>
+        <form class="col-4" action="/register" method="post">
+          <p class="h4 mb-5">Register to Ayoti</p>
 
           <% if (messages.error) { %>
           <div
@@ -46,14 +46,21 @@
               name="password"
             />
           </div>
-          <button type="submit" class="btn btn-dark mt-4 px-4">Login</button>
+          <div class="mb-3">
+            <label for="confirmPassword" class="form-label">Confirm Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="confirmPassword"
+              name="confirmPassword"
+            />
+          </div>
+          <button type="submit" class="btn btn-dark mt-4 px-4">Submit</button>
           <br>
           <p class="mt-5">
-            Don't have an account?<a  href="/register"> Register</a>
+            Already have an account?<a  href="/login"> Login</a>
           </p>
-           
         </form>
-       
       </div>
     </section>
     
